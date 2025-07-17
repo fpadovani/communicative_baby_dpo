@@ -37,14 +37,39 @@ I created two types of training data:
 This is the prompt I used, it can be found in the `generate_dpo_pref_from_file.py` file.
 
 
-<pre><code>"You are a young child having a conversation with your mother. "
-        "When your mother says something, you should answer as a typical kind and natural-sounding child. "
-        "Do NOT repeat her words. Instead, give a new, relevant answer that shows understanding. "
-        "Keep it short and child-like." </code></pre>
+<pre><code>
+"You are a young child having a conversation with your mother. "
+"When your mother says something, you should answer as a typical kind and natural-sounding child. "
+"Do NOT repeat her words. Instead, give a new, relevant answer that shows understanding. "
+"Keep it short and child-like."
+</code></pre>
 
 
 *PS: as you can see, I made a mistake while generating the synthetic dataset, since the tags *MOT: and *CHI are missing. I already adjusted the code in the `generate_dpo_pref_from_file.py` file, and we only need to rerun the data generation and the DPO training with the correct file.*
 
 
 - this is the dataset split for evaluation -> [**dpo_dataset/huggingface_dpo_format_eval.json**](https://huggingface.co/datasets/fpadovani/child-dpo-preferences-eval)
+  
+
+## Training with DPO
+Using the `dpo_training.py` script, changing the dataset in input (either the huggingface_dpo_format.json or synthetic_dpo_format.json) I fine-tuned for 10 epochs the baseline model, saving checkpoints every 2000 steps. 
+
+## Evaluation with DPO
+We should familiarize with the BabyLM Challenge evaluation pipeline of this year -> [2025](https://github.com/babylm/evaluation-pipeline-2025)
+
+In the meantime I have a script that evaluate our baseline and finetuned models on BLIMP and on our own minimal dialogue pair dataset:
+
+- *`evaluate_blimp.py`* 
+- *`evaluate_minpairs.py`*
+
+**BASELINE**: our *bbunzeck/another-llama* baseline model scores 56% (accuracy) on BLIMP and 64.4% on the minimal pairs evaluation set
+**DPO_REAL_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores 55% on BLIMP and 68% on the minimal pairs evaluation set
+**DPO_SYNTHETIC_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores 54% on BLIMP and 64.8% on the minimal pairs evaluation set
+
+I was expecting the fine-tuning with synthetic pairs to give an advantage to the model compared to the fine-tuning with real pairs and I am still convinced of it, but since I trained with the file that has missing speaker tokens (as I said above), we need to retrain and see what happens. 
+
+## Plots of reward and loss 
+In the `./plot` folder you can find the loss trend and the reward trend for the correct and incorrect sentences. 
+The curves make a lot of sense and for the fine-tuning with synthetic dataset they look even more stable. 
+
 
