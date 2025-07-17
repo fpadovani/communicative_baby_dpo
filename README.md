@@ -62,8 +62,10 @@ In the meantime I have a script that evaluate our baseline and finetuned models 
 - *`evaluate_blimp.py`* 
 - *`evaluate_minpairs.py`*
 
-**BASELINE**: our *bbunzeck/another-llama* baseline model scores 56% (accuracy) on BLIMP and 64.4% on the minimal pairs evaluation set
-**DPO_REAL_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores 55% on BLIMP and 68% on the minimal pairs evaluation set
+**BASELINE**: our *bbunzeck/another-llama* baseline model scores 56% (accuracy) on BLIMP and 64.4% on the minimal pairs evaluation set \
+
+**DPO_REAL_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores 55% on BLIMP and 68% on the minimal pairs evaluation set 
+
 **DPO_SYNTHETIC_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores 54% on BLIMP and 64.8% on the minimal pairs evaluation set
 
 I was expecting the fine-tuning with synthetic pairs to give an advantage to the model compared to the fine-tuning with real pairs and I am still convinced of it, but since I trained with the file that has missing speaker tokens (as I said above), we need to retrain and see what happens. 
