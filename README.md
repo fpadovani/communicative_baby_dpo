@@ -25,7 +25,7 @@ These files can be found in the `./dpo_dataset` folder:
 4. `tok_pairs_overlap_1.csv` -> total of 88136 min pairs
 
 
-I have taken the first file to generate a DPO training dataset and and an evaluation dataset to be used to test baseline and fine-tuned models.
+I have taken the first file to generate a DPO training dataset split and an evaluation dataset split to be used to evaluate baseline and fine-tuned models (as we agreed before).
 I used 18000 rows for the training and the rest for evaluation.
 
 I created two types of training data:
