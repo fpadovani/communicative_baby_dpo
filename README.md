@@ -2,7 +2,7 @@
 
 ## Model
 
-As baseline, we use the model pre-trained by Bastian -> [Baseline_baby][[bbunzeck/another-llama](https://huggingface.co/bbunzeck/another-llama)] 
+As baseline, we use the model pre-trained by Bastian -> [Baseline_baby](https://huggingface.co/bbunzeck/another-llama)
 
 ## DPO Dataset
 
