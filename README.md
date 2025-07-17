@@ -8,4 +8,4 @@ As baseline, we use the model pre-trained by Bastian -> [Baseline_baby](https://
 
 Bastian has taken the two data splits (comprising communicative turns - triplets - between a MOT/FAT/INV and a CHI) that he didn't use for training, \
 specifically childes-dialogue2.txt and childes-dialogue3.txt, and he extracted real minimal pair interactions for instance: 
-<pre><code> *MOT: what is that ? *CHI: it looks like a gun . </code></pre>
+**< *MOT: what is that ? *CHI: it looks like a gun . >**
