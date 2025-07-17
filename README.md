@@ -1,5 +1,7 @@
 # DPO Training to finetune a Baby and make it more Communicative
 
+To run correctly the code in this repository you need the last version of the trl library. 
+
 ## Model
 
 As baseline, we use the model pre-trained by Bastian -> [Baseline_baby](https://huggingface.co/bbunzeck/another-llama)
