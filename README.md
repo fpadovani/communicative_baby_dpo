@@ -47,8 +47,6 @@ This is the prompt I used, it can be found in the `generate_dpo_pref_from_file.p
 </code></pre>
 
 
-*PS: as you can see, I made a mistake while generating the synthetic dataset, since the tags *MOT: and *CHI are missing. I already adjusted the code in the `generate_dpo_pref_from_file.py` file, and we only need to rerun the data generation and the DPO training with the correct file.*
-
 
 - this is the dataset split for evaluation -> [**dpo_dataset/huggingface_dpo_format_eval.json**](https://huggingface.co/datasets/fpadovani/child-dpo-preferences-eval)
   
@@ -72,12 +70,14 @@ In the meantime I have a script that evaluate our baseline and finetuned models 
 
 **DPO_REAL_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores 55% on BLIMP and 68% on the minimal pairs evaluation set 
 
-**DPO_SYNTHETIC_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores 54% on BLIMP and 64.8% on the minimal pairs evaluation set
+**DPO_SYNTHETIC_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores 54% on BLIMP and 66.8% on the minimal pairs evaluation set
 
-I was expecting the fine-tuning with synthetic pairs to give an advantage to the model compared to the fine-tuning with real pairs and I am still convinced of it, but since I trained with the file that has missing speaker tokens (as I said above), we need to retrain and see what happens. 
+
+**RESULTs**: I wouldn't call degradation in performance the 0.1/0.2 % decrease in BLIMP accuracy, it can be considered noise. Good that we have an improvement of accuracy (even if small) on dialogue minimal pairs after fine-tuning. 
+
 
 ## Plots of reward and loss 
-In the `./plot` folder you can find the loss trend and the reward trend for the correct and incorrect sentences. 
+In the `./plots` folder you can find the loss trend and the reward trend for the correct and incorrect sentences. 
 The curves make a lot of sense and for the fine-tuning with synthetic dataset they look even more stable. 
 
 
