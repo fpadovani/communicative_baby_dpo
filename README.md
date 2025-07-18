@@ -56,6 +56,10 @@ This is the prompt I used, it can be found in the `generate_dpo_pref_from_file.p
 ## Training with DPO
 Using the `dpo_training.py` script, changing the dataset in input (either the huggingface_dpo_format.json or synthetic_dpo_format.json) I fine-tuned for 10 epochs the baseline model, saving checkpoints every 2000 steps. 
 
+The fine-tuned models can be found here:
+- [fpadovani/communicative-baby-dpo](https://huggingface.co/fpadovani/communicative-baby-dpo)
+- [fpadovani/communicative-baby-dpo-synthetic](https://huggingface.co/fpadovani/communicative-baby-dpo-synthetic)
+
 ## Evaluation with DPO
 We should familiarize with the BabyLM Challenge evaluation pipeline of this year -> [2025](https://github.com/babylm/evaluation-pipeline-2025)
 
