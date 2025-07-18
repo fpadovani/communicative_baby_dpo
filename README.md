@@ -70,10 +70,10 @@ In the meantime I have a script that evaluate our baseline and finetuned models 
 
 **DPO_REAL_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores 55% on BLIMP and 68% on the minimal pairs evaluation set 
 
-**DPO_SYNTHETIC_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores 54% on BLIMP and 66.8% on the minimal pairs evaluation set
+**DPO_SYNTHETIC_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores 55% on BLIMP and 66.8% on the minimal pairs evaluation set
 
 
-**RESULTs**: I wouldn't call degradation in performance the 0.1/0.2 % decrease in BLIMP accuracy, it can be considered noise. Good that we have an improvement of accuracy (even if small) on dialogue minimal pairs after fine-tuning. 
+**RESULTs**: I wouldn't call degradation in performance the 1 % decrease in BLIMP accuracy, it can be considered noise. Good that we have an improvement of accuracy (even if small) on dialogue minimal pairs after fine-tuning. 
 
 
 ## Plots of reward and loss 
