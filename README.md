@@ -68,7 +68,7 @@ In the meantime I have a script that evaluate our baseline and finetuned models 
 - *`./evaluation/evaluate_zorro.py`* 
 - *`./evaluation/evaluate_dialogue_minpairs.py`*
 
-**BASELINE**: our *bbunzeck/another-llama* baseline model scores 56% (accuracy) on BLIMP and 64.3% on the minimal pairs evaluation set based on words match, and ...% on dialogue minimal pairs based on tokens match. \
+**BASELINE**: our *bbunzeck/another-llama* baseline model scores 56% (accuracy) on BLIMP and 64.3% on the minimal pairs evaluation set based on words match, and 63.8% on dialogue minimal pairs based on tokens match. \
 
 **DPO_REAL_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores 55% on BLIMP and 68.4% on the minimal pairs evaluation set based on words match, and ...% on dialogue minimal pairs based on tokens match.  \
 
