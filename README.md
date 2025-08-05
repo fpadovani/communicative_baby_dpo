@@ -63,18 +63,19 @@ The fine-tuned models can be found here:
 ## Evaluation with DPO
 We should familiarize with the BabyLM Challenge evaluation pipeline of this year -> [2025](https://github.com/babylm/evaluation-pipeline-2025)
 
-In the meantime I have a script that evaluate our baseline and finetuned models on BLIMP and on our own minimal dialogue pair dataset:
+In the meantime I have scripts that evaluate our baseline and finetuned models on Zorro, on our own minimal dialogue pair dataset (with words matched length and token matched length) and on single lexical items (taken from Bastian lexical decision task paper):
 
 - *`./evaluation/evaluate_zorro.py`* 
 - *`./evaluation/evaluate_dialogue_minpairs.py`*
+- *`./evaluation/evaluate_lexicon.py`*
 
-**BASELINE**: our *bbunzeck/another-llama* baseline model scores 56% (accuracy) on BLIMP and 64.3% on the minimal pairs evaluation set based on words match, and 63.8% on dialogue minimal pairs based on tokens match. \
+**BASELINE**: our *bbunzeck/another-llama* baseline model scores **56%** (accuracy) on Zorro and **64.3%** on the minimal pairs evaluation set based on words match, and **63.8%** on dialogue minimal pairs based on tokens match. It scores **40.3%** on the lexical decision task. \
 
-**DPO_REAL_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores 55% on BLIMP and 68.4% on the minimal pairs evaluation set based on words match, and ...% on dialogue minimal pairs based on tokens match.  \
+**DPO_REAL_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores **55%** on Zorro and **68.4%** on the minimal pairs evaluation set based on words match, and **...%** on dialogue minimal pairs based on tokens match. It scores **40.3%** on the lexical decision task. \
 
-**DPO_SYNTHETIC_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores 55% on BLIMP and 64.9% on the minimal pairs evaluation set based on words match, and 64.3% on dialogue minimal pairs based on tokens match. \
+**DPO_SYNTHETIC_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores **55%** on Zorro and **64.9%** on the minimal pairs evaluation set based on words match, and **64.3%** on dialogue minimal pairs based on tokens match. It scores **40.3%** on the lexical decision task.\
 
-**RESULTs**: I wouldn't call degradation in performance the 1 % decrease in BLIMP accuracy, it can be considered noise. Good that we have an improvement of accuracy (even if small) on dialogue minimal pairs after fine-tuning. \
+**RESULTs**: I wouldn't call degradation in performance the 1 % decrease in Zorro accuracy, it can be considered noise. Good that we have an improvement of accuracy (even if small) on dialogue minimal pairs after fine-tuning. \
 
 
 ## Plots of reward and loss 
