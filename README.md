@@ -69,11 +69,11 @@ In the meantime I have scripts that evaluate our baseline and finetuned models o
 - *`./evaluation/evaluate_dialogue_minpairs.py`*
 - *`./evaluation/evaluate_lexicon.py`*
 
-**BASELINE**: our *bbunzeck/another-llama* baseline model scores **56%** (accuracy) on Zorro and **64.3%** on the minimal pairs evaluation set based on words match, and **63.8%** on dialogue minimal pairs based on tokens match. It scores **40.3%** on the lexical decision task. \
+**BASELINE**: our *bbunzeck/another-llama* baseline model scores **65.5%** (accuracy) on Zorro and **64.3%** on the minimal pairs evaluation set based on words match, and **63.8%** on dialogue minimal pairs based on tokens match. It scores **40.3%** on the lexical decision task. \
 
-**DPO_REAL_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores **55%** on Zorro and **68.4%** on the minimal pairs evaluation set based on words match, and **67.6%** on dialogue minimal pairs based on tokens match. It scores **40.5%** on the lexical decision task. \
+**DPO_REAL_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores **64.8%** on Zorro and **68.4%** on the minimal pairs evaluation set based on words match, and **67.6%** on dialogue minimal pairs based on tokens match. It scores **40.5%** on the lexical decision task. \
 
-**DPO_SYNTHETIC_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores **55%** on Zorro and **64.9%** on the minimal pairs evaluation set based on words match, and **64.3%** on dialogue minimal pairs based on tokens match. It scores **41.3%** on the lexical decision task.\
+**DPO_SYNTHETIC_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores **62.7%** on Zorro and **64.9%** on the minimal pairs evaluation set based on words match, and **64.3%** on dialogue minimal pairs based on tokens match. It scores **41.3%** on the lexical decision task.\
 
 **RESULTs**: I wouldn't call degradation in performance the 1 % decrease in Zorro accuracy, it can be considered noise. Good that we have an improvement of accuracy (even if small) on dialogue minimal pairs after fine-tuning. \
 
