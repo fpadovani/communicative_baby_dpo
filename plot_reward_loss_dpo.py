@@ -1,10 +1,48 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Load CSV file
-df = pd.read_csv("./dpo_outputs_complete_synthetic/logs/training_metrics.csv")  # Replace with your actual CSV file path
+# Load both training logs
+df_synth = pd.read_csv("./dpo_outputs_complete_synthetic/logs/training_metrics.csv")
+df_real = pd.read_csv("./dpo_outputs_complete/logs/training_metrics.csv")
+
+# Set font sizes and line width
+label_fontsize = 14
+tick_fontsize = 12
+line_width = 1.2
 
 # Plot 1: Loss over Steps
+plt.figure(figsize=(10, 6))
+plt.plot(df_synth["step"], df_synth["loss"], label="Synthetic DPO", color="blue", linewidth=line_width)
+plt.plot(df_real["step"], df_real["loss"], label="Naturalistic DPO", color="orange", linewidth=line_width)
+plt.xlabel("Step", fontsize=label_fontsize, labelpad=10)
+plt.ylabel("Loss", fontsize=label_fontsize, labelpad=10)
+plt.xticks(fontsize=tick_fontsize)
+plt.yticks(fontsize=tick_fontsize)
+plt.grid(True, axis='both', linestyle='--', linewidth=0.5, alpha=0.7)
+plt.legend()
+plt.tight_layout()
+plt.savefig("./plots/loss_trend_dpo_comparison.png")
+plt.close()
+
+# Plot 2: Rewards over Steps
+plt.figure(figsize=(10, 6))
+plt.plot(df_synth["step"], df_synth["rewards/chosen"], label="Synthetic - Rewards/Chosen", color="#90ee90", linewidth=line_width)
+plt.plot(df_synth["step"], df_synth["rewards/rejected"], label="Synthetic - Rewards/Rejected", color="orange", linewidth=line_width)
+plt.plot(df_real["step"], df_real["rewards/chosen"], label="Naturalistic - Rewards/Chosen", color="darkgreen", linewidth=line_width)
+plt.plot(df_real["step"], df_real["rewards/rejected"], label="Naturalistic - Rewards/Rejected", color="darkred", linewidth=line_width)
+plt.xlabel("Step", fontsize=label_fontsize, labelpad=10)
+plt.ylabel("Reward", fontsize=label_fontsize, labelpad=10)
+plt.xticks(fontsize=tick_fontsize)
+plt.yticks(fontsize=tick_fontsize)
+plt.grid(True, axis='both', linestyle='--', linewidth=0.5, alpha=0.7)
+plt.legend()
+plt.tight_layout()
+plt.savefig("./plots/rewards_trend_dpo_comparison.png")
+plt.close()
+
+
+
+'''# Plot 1: Loss over Steps
 plt.figure(figsize=(10, 6))
 plt.plot(df["step"], df["loss"], label="Loss", color="blue", linewidth=2)
 plt.xlabel("Step")
@@ -27,4 +65,4 @@ plt.grid(True)
 plt.legend()
 plt.tight_layout()
 plt.savefig("./plots/rewards_trend_dpo_synthetic.png")
-plt.close()
+plt.close()'''
