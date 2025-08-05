@@ -59,8 +59,10 @@ def evaluate_model(model, data):
 
 
 
+gpt_bert_words = evaluate_model(gpt_bert, data_words)
+print(f"Gpt-BErt model accuracy: {gpt_bert_words:.3f}")
 
-'''baseline_words = evaluate_model(baseline_model, data_words)
+baseline_words = evaluate_model(baseline_model, data_words)
 print(f"Baseline model accuracy: {baseline_words:.3f}")
 
 finetuned_1_words = evaluate_model(finetuned_model_1, data_words)
@@ -68,6 +70,9 @@ print(f"Fine-tuned model accuracy: {finetuned_1_words:.3f}")
 
 finetuned_2_words = evaluate_model(finetuned_model_2, data_words)
 print(f"Fine-tuned model accuracy: {finetuned_2_words:.3f}")
+
+gpt_bert_tokens = evaluate_model(gpt_bert, data_tokens)
+print(f"Gpt-BErt model accuracy: {gpt_bert_tokens:.3f}")
 
 baseline_tokens = evaluate_model(baseline_model, data_tokens)
 print(f"Baseline model accuracy: {baseline_tokens:.3f}")
@@ -77,10 +82,4 @@ print(f"Fine-tuned model accuracy: {finetuned_1_tokens:.3f}")
 
 finetuned_2_tokens = evaluate_model(finetuned_model_2, data_tokens)
 print(f"Fine-tuned model accuracy: {finetuned_2_tokens:.3f}")
-'''
 
-gpt_bert_words = evaluate_model(gpt_bert, data_words)
-print(f"Baseline model accuracy: {gpt_bert_words:.3f}")
-
-gpt_bert_tokens = evaluate_model(gpt_bert, data_tokens)
-print(f"Baseline model accuracy: {gpt_bert_tokens:.3f}")

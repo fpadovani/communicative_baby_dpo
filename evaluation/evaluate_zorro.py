@@ -67,8 +67,7 @@ paradigm_acc_gptb, overall_acc_gptb = evaluate_zorro(
 print(paradigm_acc_gptb, overall_acc_gptb)
 
 
-
-'''paradigm_acc_baseline, overall_acc_baseline = evaluate_zorro(
+paradigm_acc_baseline, overall_acc_baseline = evaluate_zorro(
     lm=baseline_model,
     test_suite_folder=zorro_folder,
     lower_case=True
@@ -88,5 +87,5 @@ paradigm_acc_finetuned2, overall_acc_finetuned2 = evaluate_zorro(
     test_suite_folder=zorro_folder,
     lower_case=True
 )
-print(paradigm_acc_finetuned2, overall_acc_finetuned2)'''
+print(paradigm_acc_finetuned2, overall_acc_finetuned2)
 

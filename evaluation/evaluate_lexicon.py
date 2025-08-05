@@ -54,14 +54,14 @@ def evaluate_lexical_decision_model(model, data):
 # === Run evaluations ===
 print("\ns Evaluating models on lexical decision task...\n")
 
-'''acc_baseline = evaluate_lexical_decision_model(baseline_model, data)
+acc_gptbert = evaluate_lexical_decision_model(gpt_bert, data)
+print(f" Baseline model accuracy: {acc_gptbert:.3f}")
+
+acc_baseline = evaluate_lexical_decision_model(baseline_model, data)
 print(f" Baseline model accuracy: {acc_baseline:.3f}")
 
 acc_ft1 = evaluate_lexical_decision_model(finetuned_model_1, data)
 print(f"Fine-tuned model 1 accuracy: {acc_ft1:.3f}")
 
 acc_ft2 = evaluate_lexical_decision_model(finetuned_model_2, data)
-print(f"Fine-tuned model 2 accuracy: {acc_ft2:.3f}")'''
-
-acc_gptbert = evaluate_lexical_decision_model(gpt_bert, data)
-print(f" Baseline model accuracy: {acc_gptbert:.3f}")
+print(f"Fine-tuned model 2 accuracy: {acc_ft2:.3f}")
