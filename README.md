@@ -75,8 +75,6 @@ In the meantime I have scripts that evaluate our baseline and finetuned models o
 
 **DPO_SYNTHETIC_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores **62.7%** on Zorro and **64.9%** on the minimal pairs evaluation set based on words match, and **64.3%** on dialogue minimal pairs based on tokens match. It scores **41.3%** on the lexical decision task.\
 
-**RESULTs**: I wouldn't call degradation in performance the 1 % decrease in Zorro accuracy, it can be considered noise. Good that we have an improvement of accuracy (even if small) on dialogue minimal pairs after fine-tuning. \
-
 
 ## Plots of reward and loss 
 In the `./plots` folder you can find the loss trend and the reward trend for the correct and incorrect sentences. 
