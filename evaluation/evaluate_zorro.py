@@ -48,17 +48,27 @@ def evaluate_zorro(lm, test_suite_folder, lower_case=False):
 
     return paradigm_accuracies, overall_accuracy
 
-
+GPT_BERT = 'BabyLM-community/babylm-baseline-10m-gpt-bert-causal-focus'
 BASELINE_PATH = "bbunzeck/another-llama"
 FINETUNED_PATH_1 = "/Users/frapadovani/Desktop/communicative_baby_dpo/dpo_outputs_complete_synthetic/checkpoints/checkpoint-5630"
 FINETUNED_PATH_2 = "/Users/frapadovani/Desktop/communicative_baby_dpo/dpo_outputs_complete/checkpoints/checkpoint-5630"
 zorro_folder = '/Users/frapadovani/Desktop/communicative_baby_dpo/evaluation/test_suites/zorro'
 
+gpt_bert = scorer.IncrementalLMScorer(GPT_BERT, device='cpu', trust_remote_code=True)
 baseline_model = scorer.IncrementalLMScorer(BASELINE_PATH, device='cpu')
 finetuned_1 = scorer.IncrementalLMScorer(FINETUNED_PATH_1, device='cpu')
 finetuned_2 = scorer.IncrementalLMScorer(FINETUNED_PATH_2, device='cpu')
 
-paradigm_acc_baseline, overall_acc_baseline = evaluate_zorro(
+paradigm_acc_gptb, overall_acc_gptb = evaluate_zorro(
+    lm=gpt_bert,
+    test_suite_folder=zorro_folder,
+    lower_case=True
+)
+print(paradigm_acc_gptb, overall_acc_gptb)
+
+
+
+'''paradigm_acc_baseline, overall_acc_baseline = evaluate_zorro(
     lm=baseline_model,
     test_suite_folder=zorro_folder,
     lower_case=True
@@ -78,5 +88,5 @@ paradigm_acc_finetuned2, overall_acc_finetuned2 = evaluate_zorro(
     test_suite_folder=zorro_folder,
     lower_case=True
 )
-print(paradigm_acc_finetuned2, overall_acc_finetuned2)
+print(paradigm_acc_finetuned2, overall_acc_finetuned2)'''
 

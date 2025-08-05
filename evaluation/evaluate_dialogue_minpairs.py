@@ -7,6 +7,7 @@ from tqdm import tqdm
 # CONFIG: Choose your model and dataset
 DIALOGUE_WORDS= "fpadovani/dialogue_eval_words" 
 DIALOGUE_TOKENS = "fpadovani/dialogue_eval_tokens" 
+GPT_BERT = 'BabyLM-community/babylm-baseline-10m-gpt-bert-causal-focus'
 BASELINE_PATH = "bbunzeck/another-llama"
 FINETUNED_PATH_1 = "/Users/frapadovani/Desktop/communicative_baby_dpo/dpo_outputs_complete_synthetic/checkpoints/checkpoint-5630"  # Local path to first fine-tuned model
 FINETUNED_PATH_2 = "/Users/frapadovani/Desktop/communicative_baby_dpo/dpo_outputs_complete/checkpoints/checkpoint-5630"
@@ -30,6 +31,7 @@ data_tokens = dataset_tokens.to_list()
 
 # Load MiniCONS models
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
+gpt_bert = scorer.IncrementalLMScorer(GPT_BERT, device=device, trust_remote_code=True)
 baseline_model = scorer.IncrementalLMScorer(BASELINE_PATH, device=device)
 finetuned_model_1 = scorer.IncrementalLMScorer(FINETUNED_PATH_1, device=device)
 finetuned_model_2 = scorer.IncrementalLMScorer(FINETUNED_PATH_2, device=device)
@@ -59,7 +61,7 @@ def evaluate_model(model, data):
 
 
 '''baseline_words = evaluate_model(baseline_model, data_words)
-print(f"Baseline model accuracy: {baseline_words:.3f}")'''
+print(f"Baseline model accuracy: {baseline_words:.3f}")
 
 finetuned_1_words = evaluate_model(finetuned_model_1, data_words)
 print(f"Fine-tuned model accuracy: {finetuned_1_words:.3f}")
@@ -75,3 +77,10 @@ print(f"Fine-tuned model accuracy: {finetuned_1_tokens:.3f}")
 
 finetuned_2_tokens = evaluate_model(finetuned_model_2, data_tokens)
 print(f"Fine-tuned model accuracy: {finetuned_2_tokens:.3f}")
+'''
+
+gpt_bert_words = evaluate_model(gpt_bert, data_words)
+print(f"Baseline model accuracy: {gpt_bert_words:.3f}")
+
+gpt_bert_tokens = evaluate_model(gpt_bert, data_tokens)
+print(f"Baseline model accuracy: {gpt_bert_tokens:.3f}")

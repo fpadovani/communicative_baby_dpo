@@ -5,6 +5,7 @@ import torch
 from tqdm import tqdm
 
 # === Model paths ===
+GPT_BERT = 'BabyLM-community/babylm-baseline-10m-gpt-bert-causal-focus'
 BASELINE_PATH = "bbunzeck/another-llama"
 FINETUNED_PATH_1 = "/Users/frapadovani/Desktop/communicative_baby_dpo/dpo_outputs_complete_synthetic/checkpoints/checkpoint-5630"
 FINETUNED_PATH_2 = "/Users/frapadovani/Desktop/communicative_baby_dpo/dpo_outputs_complete/checkpoints/checkpoint-5630"
@@ -20,6 +21,7 @@ data = dataset.to_list()
 # === Load MiniCONS models ===
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
+gpt_bert = scorer.IncrementalLMScorer(GPT_BERT, device='cpu', trust_remote_code=True)
 baseline_model = scorer.IncrementalLMScorer(BASELINE_PATH, device=device)
 finetuned_model_1 = scorer.IncrementalLMScorer(FINETUNED_PATH_1, device=device)
 finetuned_model_2 = scorer.IncrementalLMScorer(FINETUNED_PATH_2, device=device)
@@ -52,11 +54,14 @@ def evaluate_lexical_decision_model(model, data):
 # === Run evaluations ===
 print("\ns Evaluating models on lexical decision task...\n")
 
-acc_baseline = evaluate_lexical_decision_model(baseline_model, data)
+'''acc_baseline = evaluate_lexical_decision_model(baseline_model, data)
 print(f" Baseline model accuracy: {acc_baseline:.3f}")
 
 acc_ft1 = evaluate_lexical_decision_model(finetuned_model_1, data)
 print(f"Fine-tuned model 1 accuracy: {acc_ft1:.3f}")
 
 acc_ft2 = evaluate_lexical_decision_model(finetuned_model_2, data)
-print(f"Fine-tuned model 2 accuracy: {acc_ft2:.3f}")
+print(f"Fine-tuned model 2 accuracy: {acc_ft2:.3f}")'''
+
+acc_gptbert = evaluate_lexical_decision_model(gpt_bert, data)
+print(f" Baseline model accuracy: {acc_gptbert:.3f}")

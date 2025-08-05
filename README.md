@@ -69,7 +69,9 @@ In the meantime I have scripts that evaluate our baseline and finetuned models o
 - *`./evaluation/evaluate_dialogue_minpairs.py`*
 - *`./evaluation/evaluate_lexicon.py`*
 
-**BASELINE**: our *bbunzeck/another-llama* baseline model scores **65.5%** (accuracy) on Zorro and **64.3%** on the minimal pairs evaluation set based on words match, and **63.8%** on dialogue minimal pairs based on tokens match. It scores **40.3%** on the lexical decision task. \
+**BASELINE**: the baseline model provided by the organizer of the BabyLM Challenge, it is trained on 10M tokens, but winning architecture from last year. [BabyLM-community/babylm-baseline-10m-gpt-bert-causal-focus][https://huggingface.co/BabyLM-community/babylm-baseline-10m-gpt-bert-causal-focus]. It scores 
+
+**PRE-TRAINED**: our *bbunzeck/another-llama* baseline model scores **65.5%** (accuracy) on Zorro and **64.3%** on the minimal pairs evaluation set based on words match, and **63.8%** on dialogue minimal pairs based on tokens match. It scores **40.3%** on the lexical decision task. \
 
 **DPO_REAL_PAIRS**: the last checkpoint of our fine-tuned model on real dpo pairs scores **64.8%** on Zorro and **68.4%** on the minimal pairs evaluation set based on words match, and **67.6%** on dialogue minimal pairs based on tokens match. It scores **40.5%** on the lexical decision task. \
 
