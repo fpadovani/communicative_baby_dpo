@@ -9,7 +9,9 @@ from utils_ppo import *
 
 
 CSV_PATH = "./dpo_dataset/len_pairs_no_overlap_1.csv"
+CSV_PATH_tokens = "./dpo_dataset/tok_pairs_no_overlap_1.csv"
 OUTPUT_JSON_REAL = "./dpo_dataset/huggingface_dpo_format.json"
+OUTPUT_JSON_REAL_TOKENS_EVAL = "./dpo_dataset/huggingface_dpo_format_eval_tokens.json"
 OUTPUT_JSON_SYNTHETIC = "./dpo_dataset/synthetic_dpo_format.json"
 HF_HUB_NAME = "fpadovani/child-dpo-preferences"
 MODEL_NAME = "meta-llama/Llama-3.2-3B"
@@ -24,7 +26,7 @@ def split_turns(pair):
 
 
 
-def create_dataset_real():
+def create_dataset_real_words():
     df = pd.read_csv(CSV_PATH)
     df_train = df[:18000]
 
@@ -47,6 +49,33 @@ def create_dataset_real():
     dataset_dict.push_to_hub(HF_HUB_NAME)
 
     print(f"✅ Real dataset saved to {OUTPUT_JSON_REAL} and pushed to HuggingFace.")
+
+
+def create_dataset_real_tokens():
+    df = pd.read_csv(CSV_PATH_tokens)
+    df_train = df[:18000]
+    df_eval = df[18000:]
+
+    preference_data = []
+    for _, row in df_eval.iterrows():
+        pos_mot, pos_chi = split_turns(row["pospair"])
+        neg_mot, neg_chi = split_turns(row["negpair"])
+        if pos_mot and neg_mot and pos_mot == neg_mot:
+            preference_data.append({
+                "prompt": pos_mot,
+                "chosen": pos_chi,
+                "rejected": neg_chi
+            })
+
+    with open(OUTPUT_JSON_REAL_TOKENS_EVAL, "w", encoding="utf-8") as f:
+        json.dump(preference_data, f, indent=2, ensure_ascii=False)
+
+    dataset = Dataset.from_list(preference_data)
+    dataset_dict = DatasetDict({"train": dataset})
+    dataset_dict.push_to_hub(f"{HF_HUB_NAME}-eval-tokens")
+
+    print(f"✅ Real dataset eval tokens saved to {OUTPUT_JSON_REAL_TOKENS_EVAL} and pushed to HuggingFace.")
+
 
 
 
@@ -125,13 +154,16 @@ def create_dataset_synthetic():
 
 if __name__ == "__main__":
     print("Choose dataset generation mode:")
-    print("1. Use real child utterances (pospair/negpair)")
+    print("1. Use real child utterances (pospair/negpair) - words matched")
     print("2. Use LLM to generate child utterances")
+    print("3. Use real child utterances (pospair/negpair) - tokenss matched")
 
-    choice = input("Enter 1 or 2: ").strip()
+    choice = input("Enter 1, 2 or 3:").strip()
     if choice == "1":
-        create_dataset_real()
+        create_dataset_real_words()
     elif choice == "2":
         create_dataset_synthetic()
+    elif choice == "3":
+        create_dataset_real_tokens()
     else:
         print("Invalid input. Exiting.")

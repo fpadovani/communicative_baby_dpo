@@ -5,23 +5,34 @@ import torch
 from tqdm import tqdm
 
 # CONFIG: Choose your model and dataset
-DATASET_PATH = "fpadovani/child-dpo-preferences-eval"  # HF dataset repo
+DIALOGUE_WORDS= "fpadovani/dialogue_eval_words" 
+DIALOGUE_TOKENS = "fpadovani/dialogue_eval_tokens" 
 BASELINE_PATH = "bbunzeck/another-llama"
-FINETUNED_PATH = "./dpo_outputs_complete_synthetic/checkpoint-5630"
+FINETUNED_PATH_1 = "./dpo_outputs_complete_synthetic/checkpoints/checkpoint-5630"  # Local path to first fine-tuned model
+FINETUNED_PATH_2 = "./dpo_outputs_complete/checkpoints/checkpoint-5630"
 SPLIT = "train"
 
 # Load dataset from HuggingFace
-print(f"🔄 Loading HuggingFace dataset: {DATASET_PATH}")
-dataset = load_dataset(DATASET_PATH, split=SPLIT)
-print(f"✅ Loaded {len(dataset)} samples.")
+print(f"🔄 Loading HuggingFace evaluation datasets words: {DIALOGUE_WORDS}")
+dataset_words = load_dataset(DIALOGUE_WORDS, split=SPLIT)
+print(f"✅ Loaded {len(dataset_words)} samples.")
+
+# Load dataset 2 from HuggingFace
+print(f"🔄 Loading HuggingFace evaluation datasets tokens: {DIALOGUE_TOKENS}")
+dataset_tokens = load_dataset(DIALOGUE_TOKENS, split=SPLIT)
+print(f"✅ Loaded {len(dataset_tokens)} samples.")
+
+
 
 # Convert to list of dicts for iteration
-data = dataset.to_list()
+data_words = dataset_words.to_list()
+data_tokens = dataset_tokens.to_list()
 
 # Load MiniCONS models
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 baseline_model = scorer.IncrementalLMScorer(BASELINE_PATH, device=device)
-finetuned_model = scorer.IncrementalLMScorer(FINETUNED_PATH, device=device)
+finetuned_model_1 = scorer.IncrementalLMScorer(FINETUNED_PATH_1, device=device)
+finetuned_model_2 = scorer.IncrementalLMScorer(FINETUNED_PATH_2, device=device)
 
 # Evaluation function
 def evaluate_model(model, data):
@@ -36,8 +47,8 @@ def evaluate_model(model, data):
         pos_input = prompt + " " + chosen
         neg_input = prompt + " " + rejected
 
-        pos_score = model.sequence_score(pos_input)
-        neg_score = model.sequence_score(neg_input)
+        pos_score = model.sequence_score(pos_input, reduction = lambda x: x.sum(0).item(), bow_correction=True)
+        neg_score = model.sequence_score(neg_input, reduction = lambda x: x.sum(0).item(), bow_correction=True)
 
         if pos_score > neg_score:
             correct += 1
@@ -47,9 +58,20 @@ def evaluate_model(model, data):
 
 
 
-baseline_acc = evaluate_model(baseline_model, data)
-print(f"Baseline model accuracy: {baseline_acc:.3f}")
+baseline_words = evaluate_model(baseline_model, data_words)
+print(f"Baseline model accuracy: {baseline_words:.3f}")
 
+finetuned_1_words = evaluate_model(finetuned_model_1, data_words)
+print(f"Fine-tuned model accuracy: {finetuned_1_words:.3f}")
 
-finetuned_acc = evaluate_model(finetuned_model, data)
-print(f"Fine-tuned model accuracy: {finetuned_acc:.3f}")
+finetuned_2_words = evaluate_model(finetuned_model_2, data_words)
+print(f"Fine-tuned model accuracy: {finetuned_2_words:.3f}")
+
+baseline_tokens = evaluate_model(baseline_model, data_tokens)
+print(f"Baseline model accuracy: {baseline_tokens:.3f}")
+
+finetuned_1_tokens = evaluate_model(finetuned_model_1, data_tokens)
+print(f"Fine-tuned model accuracy: {finetuned_1_tokens:.3f}")
+
+finetuned_2_tokens = evaluate_model(finetuned_model_2, data_tokens)
+print(f"Fine-tuned model accuracy: {finetuned_2_tokens:.3f}")

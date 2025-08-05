@@ -6,7 +6,7 @@ import torch
 from datasets import Dataset
 
 
-embedder = SentenceTransformer('all-MiniLM-L6-v2', device='cuda')
+embedder = SentenceTransformer('all-MiniLM-L6-v2', device='cpu')
 bleu_metric = evaluate.load("bleu")
 
 
