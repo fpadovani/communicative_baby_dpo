@@ -27,7 +27,7 @@ These files can be found in the `./dpo_dataset` folder:
 4. `tok_pairs_overlap_1.csv` -> total of 88136 min pairs
 
 
-I have taken the first file to generate a DPO training dataset split and an evaluation dataset split to be used to evaluate baseline and fine-tuned models (as we agreed before).
+I have taken the first file to generate a DPO training dataset split and an evaluation dataset split to be used to evaluate baseline and fine-tuned models (as we agreed before), these are based on matched amount of words (tokens).
 I used 18000 rows for the training and the rest for evaluation.
 
 I created two types of training data:
@@ -48,7 +48,9 @@ This is the prompt I used, it can be found in the `generate_dpo_pref_from_file.p
 
 
 
-- this is the dataset split for evaluation -> [**dpo_dataset/huggingface_dpo_format_eval.json**](https://huggingface.co/datasets/fpadovani/child-dpo-preferences-eval)
+- this is the dataset split for evaluation -> [**dpo_dataset/huggingface_dpo_format_eval.json**](https://huggingface.co/datasets/fpadovani/dialogue_eval_tokens) \
+
+Moreover, I also used the `tok_pairs_no_overlap_1.csv` file to generate another evaluation set of minimal pairs based on matched amount of tokens between the pairs. The dataset split in this case is the following -> [**dpo_dataset/huggingface_dpo_format_eval_tokens.json**](https://huggingface.co/datasets/fpadovani/dialogue_eval_tokens)
   
 
 ## Training with DPO
