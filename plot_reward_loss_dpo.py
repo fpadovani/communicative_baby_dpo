@@ -6,9 +6,10 @@ df_synth = pd.read_csv("./dpo_outputs_complete_synthetic/logs/training_metrics.c
 df_real = pd.read_csv("./dpo_outputs_complete/logs/training_metrics.csv")
 
 # Set font sizes and line width
-label_fontsize = 14
-tick_fontsize = 12
+label_fontsize = 16
+tick_fontsize = 14
 line_width = 1.2
+legend_fontsize = 18
 
 # Plot 1: Loss over Steps
 plt.figure(figsize=(10, 6))
@@ -19,7 +20,7 @@ plt.ylabel("Loss", fontsize=label_fontsize, labelpad=10)
 plt.xticks(fontsize=tick_fontsize)
 plt.yticks(fontsize=tick_fontsize)
 plt.grid(True, axis='both', linestyle='--', linewidth=0.5, alpha=0.7)
-plt.legend()
+plt.legend(fontsize = legend_fontsize)
 plt.tight_layout()
 plt.savefig("./plots/loss_trend_dpo_comparison.png")
 plt.close()
@@ -35,7 +36,7 @@ plt.ylabel("Reward", fontsize=label_fontsize, labelpad=10)
 plt.xticks(fontsize=tick_fontsize)
 plt.yticks(fontsize=tick_fontsize)
 plt.grid(True, axis='both', linestyle='--', linewidth=0.5, alpha=0.7)
-plt.legend()
+plt.legend(fontsize = 15, loc='lower left')
 plt.tight_layout()
 plt.savefig("./plots/rewards_trend_dpo_comparison.png")
 plt.close()
