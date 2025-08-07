@@ -1,0 +1,9 @@
+model,zorro,dialogue_minpairs_words,dialogue_minpairs_tokens,lexical_decision_task
+challenge_baseline_simpo,77.7,58.1,57.9,57.2
+another_llama,65.5,64.3,63.8,40.3
+dpo_naturalistic,64.8,68.4,67.6,40.5
+dpo_synthetic,62.7,64.9,64.3,41.3
+ppo_bleu,62.5,62,61,40.7
+ppo_semsim,64.7,61.1,63.6,39.7
+ppo_score,65.2,60.6,62.5,40.2
+ppo_confidence,63.7,63.7,62.4,40.8

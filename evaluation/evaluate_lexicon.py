@@ -5,10 +5,11 @@ import torch
 from tqdm import tqdm
 
 # === Model paths ===
+INTERACTIVE = 'BabyLM-community/babylm-interaction-baseline-simpo'
 GPT_BERT = 'BabyLM-community/babylm-baseline-10m-gpt-bert-causal-focus'
 BASELINE_PATH = "bbunzeck/another-llama"
-FINETUNED_PATH_1 = "/Users/frapadovani/Desktop/communicative_baby_dpo/dpo_outputs_complete_synthetic/checkpoints/checkpoint-5630"
-FINETUNED_PATH_2 = "/Users/frapadovani/Desktop/communicative_baby_dpo/dpo_outputs_complete/checkpoints/checkpoint-5630"
+FINETUNED_PATH_1 = "./finetuned_models/dpo_outputs_complete_synthetic/checkpoints/checkpoint-5630"
+FINETUNED_PATH_2 = "./finetuned_models/dpo_outputs_complete/checkpoints/checkpoint-5630"
 
 # === Load the dataset ===
 print("Loading lexical-decision dataset from HuggingFace...")
@@ -21,7 +22,8 @@ data = dataset.to_list()
 # === Load MiniCONS models ===
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-gpt_bert = scorer.IncrementalLMScorer(GPT_BERT, device='cpu', trust_remote_code=True)
+interactive = scorer.IncrementalLMScorer(INTERACTIVE, device=device, trust_remote_code=True)
+gpt_bert = scorer.IncrementalLMScorer(GPT_BERT, device=device, trust_remote_code=True)
 baseline_model = scorer.IncrementalLMScorer(BASELINE_PATH, device=device)
 finetuned_model_1 = scorer.IncrementalLMScorer(FINETUNED_PATH_1, device=device)
 finetuned_model_2 = scorer.IncrementalLMScorer(FINETUNED_PATH_2, device=device)
@@ -53,6 +55,9 @@ def evaluate_lexical_decision_model(model, data):
 
 # === Run evaluations ===
 print("\ns Evaluating models on lexical decision task...\n")
+
+acc_interactive = evaluate_lexical_decision_model(interactive, data)
+print(f"Interactive model accuracy: {acc_interactive:.3f}")
 
 acc_gptbert = evaluate_lexical_decision_model(gpt_bert, data)
 print(f" Baseline model accuracy: {acc_gptbert:.3f}")

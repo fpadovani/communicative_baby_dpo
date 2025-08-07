@@ -7,10 +7,11 @@ from tqdm import tqdm
 # CONFIG: Choose your model and dataset
 DIALOGUE_WORDS= "fpadovani/dialogue_eval_words" 
 DIALOGUE_TOKENS = "fpadovani/dialogue_eval_tokens" 
+INTERACTIVE = 'BabyLM-community/babylm-interaction-baseline-simpo'
 GPT_BERT = 'BabyLM-community/babylm-baseline-10m-gpt-bert-causal-focus'
 BASELINE_PATH = "bbunzeck/another-llama"
-FINETUNED_PATH_1 = "/Users/frapadovani/Desktop/communicative_baby_dpo/dpo_outputs_complete_synthetic/checkpoints/checkpoint-5630"  # Local path to first fine-tuned model
-FINETUNED_PATH_2 = "/Users/frapadovani/Desktop/communicative_baby_dpo/dpo_outputs_complete/checkpoints/checkpoint-5630"
+FINETUNED_PATH_1 = "./finetuned_models/communicative-baby-dpo-synthetic/checkpoint-5630"  # Local path to first fine-tuned model
+FINETUNED_PATH_2 = "./finetuned_models/communicative-baby-dpo/checkpoint-5630"
 SPLIT = "train"
 
 # Load dataset from HuggingFace
@@ -31,6 +32,7 @@ data_tokens = dataset_tokens.to_list()
 
 # Load MiniCONS models
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
+interactive = scorer.IncrementalLMScorer(INTERACTIVE, device=device, trust_remote_code=True)
 gpt_bert = scorer.IncrementalLMScorer(GPT_BERT, device=device, trust_remote_code=True)
 baseline_model = scorer.IncrementalLMScorer(BASELINE_PATH, device=device)
 finetuned_model_1 = scorer.IncrementalLMScorer(FINETUNED_PATH_1, device=device)
@@ -58,6 +60,8 @@ def evaluate_model(model, data):
     return correct / total
 
 
+interactive_words = evaluate_model(interactive, data_words)
+print(f"Interactive model accuracy: {interactive_words:.3f}")
 
 gpt_bert_words = evaluate_model(gpt_bert, data_words)
 print(f"Gpt-BErt model accuracy: {gpt_bert_words:.3f}")
@@ -70,6 +74,9 @@ print(f"Fine-tuned model accuracy: {finetuned_1_words:.3f}")
 
 finetuned_2_words = evaluate_model(finetuned_model_2, data_words)
 print(f"Fine-tuned model accuracy: {finetuned_2_words:.3f}")
+
+interactive_tokens = evaluate_model(interactive, data_tokens)
+print(f"Interactive model accuracy: {interactive_tokens:.3f}")
 
 gpt_bert_tokens = evaluate_model(gpt_bert, data_tokens)
 print(f"Gpt-BErt model accuracy: {gpt_bert_tokens:.3f}")
