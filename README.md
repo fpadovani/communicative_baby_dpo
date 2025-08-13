@@ -1,39 +1,15 @@
-# DPO Training to finetune a Baby and make it more Communicative
+# BabyLM Challenge 2025 - DPO fine-tuning for a Baby Model 
 
 To run correctly the code in this repository you need the last version of the trl library. 
 
 ## Model
 
-As baseline, we use the model pre-trained by Bastian -> [Baseline_baby](https://huggingface.co/bbunzeck/another-llama)
+As baseline, we use the a model pre-trained on dialogue turns between a child and a caregiver  -> [Llamalogue](https://huggingface.co/CLAUSE-Bielefeld/llamalogue/tree/main)
 
-## DPO Dataset
+## DPO Datasets to fine-tune the model
 
-Bastian has taken the two data splits (comprising communicative turns - triplets - between a MOT/FAT/INV and a CHI) that he didn't use for training,
-specifically childes-dialogue2.txt and childes-dialogue3.txt, and he extracted real minimal pair interactions that involve not only questions, but all kinds of MOT-CHI tuples, such as: 
-<pre><code> *MOT: what is that ? *CHI: it looks like a gun .</code></pre>
-
-From these he generated 4 .txt minimal pairs files: 
-
-- mother question + correct child answer vs. mother question + incorrect child answer with matched length **(n_words)** (with or without overlap between MOT and CHI utterances)
-
-- mother question + correct child answer vs. mother question + incorrect child answer with matched length **(n_subword tokens)** (with or without overlap between MOT and CHI utterances)
-
-
-These files can be found in the `./dpo_dataset` folder:
-
-1. `len_pairs_no_overlap_1.csv` -> total of 25547 min pairs
-2. `len_pairs_overlap_1.csv` -> total of 88171 min pairs
-3. `tok_pairs_no_overlap_1.csv` -> total of 25519 min pairs
-4. `tok_pairs_overlap_1.csv` -> total of 88136 min pairs
-
-
-I have taken the first file to generate a DPO training dataset split and an evaluation dataset split to be used to evaluate baseline and fine-tuned models (as we agreed before), these are based on matched amount of words (tokens).
-I used 18000 rows for the training and the rest for evaluation.
-
-I created two types of training data:
-
-- the first one uses realistic minimal pairs (as they occur in the .txt files and as they are extracted from CHILDES by Bastian) -> [**dpo_dataset/huggingface_dpo_format.json**](https://huggingface.co/datasets/fpadovani/child-dpo-preferences)
-- the second one instead takes the *MOT: sentence as a prompt to a LLM (Teacher) that tries to simulate a good *CHI: answer -> [**dpo_dataset/synthetic_dpo_format.json**](https://huggingface.co/datasets/fpadovani/child-dpo-preferences-synthetic)
+1. the first one uses realistic minimal pairs (as they occur in the our pre-processed triplets files used to train Llamalogue and as they are extracted from CHILDES transcripts) -> [**dpo_dataset/huggingface_dpo_format.json**](https://huggingface.co/datasets/fpadovani/child-dpo-preferences)
+- the second one instead features rows that show a mother’s utterance (MOT) as a real prompt, with corresponding appropriate child responses (CHI) generated using the Llama-3.2-3B teacher model, and random responses from naturalistic mismatches (as the previous one) -> [**dpo_dataset/synthetic_dpo_format.json**](https://huggingface.co/datasets/fpadovani/child-dpo-preferences-synthetic)
 
 
 This is the prompt I used, it can be found in the `generate_dpo_pref_from_file.py` file.
