@@ -9,15 +9,15 @@ As baseline, we use the a model pre-trained on dialogue turns between a child an
 ## DPO Datasets to fine-tune the model
 
 1. the first one uses realistic minimal pairs (as they occur in the our pre-processed triplets files used to train Llamalogue and as they are extracted from CHILDES transcripts) -> [**dpo_dataset/huggingface_dpo_format.json**](https://huggingface.co/datasets/fpadovani/child-dpo-preferences)
-- the second one instead features rows that show a mother’s utterance (MOT) as a real prompt, with corresponding appropriate child responses (CHI) generated using the Llama-3.2-3B teacher model, and random responses from naturalistic mismatches (as the previous one) -> [**dpo_dataset/synthetic_dpo_format.json**](https://huggingface.co/datasets/fpadovani/child-dpo-preferences-synthetic)
+2. the second one instead features rows that show a mother’s utterance (MOT) as a real prompt, with corresponding appropriate child responses (CHI) generated using the Llama-3.2-3B teacher model, and random responses from naturalistic mismatches (as the previous one) -> [**dpo_dataset/synthetic_dpo_format.json**](https://huggingface.co/datasets/fpadovani/child-dpo-preferences-synthetic)
 
 
-This is the prompt I used, it can be found in the `generate_dpo_pref_from_file.py` file.
+This is the prompt used, it can be found in the `generate_dpo_pref_from_file.py` file.
 
 
 <pre><code>
 "You are a young child having a conversation with your mother. "
-"When your mother says something, you should answer as a typical kind and natural-sounding child. "
+"When your mother says something, you should answer as a typical and natural-sounding child. "
 "Do NOT repeat her words. Instead, give a new, relevant answer that shows understanding. "
 "Keep it short and child-like."
 </code></pre>
