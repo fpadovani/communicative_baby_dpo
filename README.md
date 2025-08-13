@@ -33,8 +33,8 @@ This is the prompt used, it can be found in the `generate_dpo_pref_from_file.py`
 Using the `dpo_training.py` script, changing the dataset in input (either the huggingface_dpo_format.json or synthetic_dpo_format.json) I fine-tuned for 10 epochs the baseline model, saving checkpoints every 2000 steps. 
 
 The fine-tuned models can be found here:
-- [fpadovani/communicative-baby-dpo](https://huggingface.co/fpadovani/communicative-baby-dpo)
-- [fpadovani/communicative-baby-dpo-synthetic](https://huggingface.co/fpadovani/communicative-baby-dpo-synthetic)
+- [CLAUSE-Bielefeld/communicative-baby-dpo](https://huggingface.co/CLAUSE-Bielefeld/communicative-baby-dpo)
+- [CLAUSE-Bielefeld/communicative-baby-dpo-synthetic](https://huggingface.co/CLAUSE-Bielefeld/communicative-baby-dpo-synthetic)
 
 ## Evaluation with DPO
 
