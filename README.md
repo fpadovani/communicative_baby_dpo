@@ -24,7 +24,7 @@ This is the prompt used, it can be found in the `generate_dpo_pref_from_file.py`
 
 
 
-- this is the dataset split for evaluation -> [**dpo_dataset/huggingface_dpo_format_eval.json**](https://huggingface.co/datasets/fpadovani/dialogue_eval_tokens) \
+- this is the dataset split for evaluation with appropriate and random sentence matched in terms of word length -> [**dpo_dataset/huggingface_dpo_format_eval.json**](https://huggingface.co/datasets/fpadovani/dialogue_eval_tokens) \
 
 Moreover, I also used the `tok_pairs_no_overlap_1.csv` file to generate another evaluation set of minimal pairs based on matched amount of tokens between the pairs. The dataset split in this case is the following -> [**dpo_dataset/huggingface_dpo_format_eval_tokens.json**](https://huggingface.co/datasets/fpadovani/dialogue_eval_tokens)
   
