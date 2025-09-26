@@ -1,4 +1,5 @@
-# BabyLM Challenge 2025 - DPO fine-tuning for a Baby Model 
+# BabyLM Challenge 2025 
+### *DPO fine-tuning for a Communicative Baby Model*
 
 To run correctly the code in this repository you need the last version of the trl library. 
 
@@ -30,7 +31,7 @@ This is the prompt used, it can be found in the `generate_dpo_pref_from_file.py`
   
 
 ## Training with DPO
-Using the `dpo_training.py` script, changing the dataset in input (either the huggingface_dpo_format.json or synthetic_dpo_format.json) I fine-tuned for 10 epochs the baseline model, saving checkpoints every 2000 steps. 
+Using the `dpo_training.py` script, changing the dataset in input (either the huggingface_dpo_format.json or synthetic_dpo_format.json) we fine-tuned for 10 epochs the baseline model, saving checkpoints every 2000 steps. 
 
 The fine-tuned models can be found here:
 - [CLAUSE-Bielefeld/communicative-baby-dpo](https://huggingface.co/CLAUSE-Bielefeld/communicative-baby-dpo)
